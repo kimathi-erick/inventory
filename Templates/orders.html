@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{%load static%}
+{%block content%}
+{%if user.is_superuser%}
+<h3>Manage__All__Orders</h3>
+{%else%}
+<h3>Track__my__orders</h3>
+{%endif%}
+
+    <hr>
+<section id="dashboard">
+    {%if user.is_superuser%}
+    {%else%}
+    <section id="info">
+        <h4>make_an_order</h4>
+        <form method="POST" style="margin: 10px;">
+            
+            {%csrf_token%}
+            {{form|crispy}}
+            <br>
+            <button type="submit" style="background-color: green;margin: 2px;
+            border: none;padding: 5px;width: 30%;color: white;border-radius: 4px;">order</button>
+            
+        </form>
+
+    </section>
+    {%endif%}
+    <section id="stats">
+        <h4>my_orders</h4>
+        <table style="width: 100%;">
+        <tr><td><b>Product</b></td><td><b>Order_quantity</b></td>{%if user.is_superuser%}<td><b>Order_by</b></td><td><b>Email</b></td>{%endif%}<td><b>Date</b></td> </tr>
+        {% for order in allorders %}
+        {%if user.is_superuser or order.staff == user%}
+        <tr><td>{{order.product}}</td>
+            <td>{{order.order_quantity}}</td>
+            {%if user.is_superuser%}
+            <td>{{order.staff.username}}</td>
+            <td>{{order.staff.email}}</td>
+            {%endif%}
+            <td>{{order.date}}</td>
+
+        </tr> 
+        {% endif %}   
+        {%endfor%}
+    </table>
+</section>
+</section>
+    
+
+
+{%endblock content%}

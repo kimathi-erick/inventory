@@ -1,0 +1,17 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+{%load static%}
+{%block content%}
+<section id="reg">
+    <form method="POST">
+        <h2>Logout page</h2>
+        <hr>
+        <p>Thank-you for your service</p>
+        {%csrf_token%}
+        {{form|crispy}}
+        <br>
+        <a href="{% url 'login' %}">Login</a>
+    </form>
+</section>
+{%endblock content%}
+

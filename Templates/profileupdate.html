@@ -1,0 +1,17 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+{%load static%}
+{%block content%}
+<section id="reg">
+    <form method="POST" enctype="multipart/form-data">
+        <h2>profile_update page</h2>
+        <hr>
+        {%csrf_token%}
+        {{user_form|crispy}}
+        {{profile_form|crispy}}
+        <br>
+        <button style="background-color: green;margin: 2px;border: none;padding: 5px;width: 20%;color: white;border-radius: 4px;">Save</button>
+    </form>
+</section>
+{%endblock content%}
+

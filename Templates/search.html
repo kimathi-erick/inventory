@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{%load static%}
+{%block content%}
+<section id="stats">
+    <table style="width: 100%;" >
+        <tr><th><b>Name</b></th><th><b>Category</b></th><th><b>Quantity</b></th><th><b>edit/delete</b></th></tr>
+        {% for product in allproducts %}
+        <tr><td>{{product.name}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.quantity}}</td>
+            <td><a href="{% url 'edit' product.id %}"><button style="background-color: green;margin: 2px;border: none;padding: 5px;width: 30%;color: white;border-radius: 4px;">edit</button></a>
+                <a href="{% url 'retrieve' product.id %}"><button style="background-color: red;margin: 2px;border: none;padding: 5px;width: 30%;color: white;border-radius: 4px;">delete</button></a>  </td>
+        </tr>    
+        {%endfor%}
+    </table>
+</section>
+{%endblock content%}

@@ -1,0 +1,17 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+{%load static%}
+{%block content%}
+<section id="reg">
+    <form method="POST">
+        <h2>Login page</h2>
+        <hr>
+        {%csrf_token%}
+        {{form|crispy}}
+        <br>
+        <button type="submit" style="background-color: green;margin: 2px;border: none;padding: 5px;width: 30%;color: white;border-radius: 4px;">Login</button><br>
+       If you don't have an account! <a href="{% url 'register' %}">register</a>
+    </form>
+</section>
+{%endblock content%}
+

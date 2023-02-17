@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{%load static%}
+{%block content%}
+<section id="dashboard">
+    <section id="info">
+        <h4>Information</h4>
+
+        <h2><marquee>Inventory_Management_System</marquee> </h2>
+    </section>
+    <section id="stats">
+        <h4>Statistics</h4>
+        <section id="stats1">
+            <div class="sts">
+                <a href="{% url 'Staff' %}"><h5>Staff</h5></a>
+                <h5>4</h5>
+    
+            </div>
+            <div class="sts">
+                <a href="{% url 'Products' %}"><h5>Products</h5></a>
+                <h5>7</h5>
+    
+            </div>
+            <div class="sts">
+                <a href="{% url 'Orders' %}"><h5>Orders</h5></a>
+                <h5>{{orders_count}}</h5>
+    
+            </div>
+        </section>
+        
+    </section>
+</section>
+<div style="margin-left: 2px;color: green;">
+    {% for message in messages%}
+        {%if message%}
+        {{message}}
+        {%endif%}
+        
+    {%endfor%}
+</div>
+
+<section id="dashboard">
+    {%if user.is_superuser%}
+    
+    <section id="info" style="position:sticky">
+        
+        <h4>add item</h4>
+        <form method="POST" style="margin: 10px;">
+            
+            {%csrf_token%}
+            {{form|crispy}}
+            <br>
+            <button type="submit" style="background-color: green;margin: 2px;
+            border: none;padding: 5px;width: 30%;color: white;border-radius: 4px;">add_item</button>
+            
+        </form>
+        
+    </section>
+    {%else%}
+    <section id="info">
+        <h4>make_an_order</h4>
+        <form method="POST" style="margin: 10px;">
+            
+            {%csrf_token%}
+            {{form|crispy}}
+            <br>
+            <button type="submit" style="background-color: green;margin: 2px;
+            border: none;padding: 5px;width: 30%;color: white;border-radius: 4px;">order</button>
+            
+        </form>
+
+    </section>
+    {%endif%}
+    <section id="stats">
+        <table style="width: 100%;" >
+            <tr><th><b>Name</b></th><th><b>Category</b></th>{%if user.is_superuser%}<th><b>Quantity</b></th><th><b>edit/delete</b></th>{%endif%}</tr>
+            {% for product in allproducts %}
+            <tr><td>{{product.name}}</td>
+                <td>{{product.category}}</td>
+                {%if user.is_superuser%}
+                <td>{{product.quantity}}</td>
+                
+                <td><a href="{% url 'edit' product.id %}"><button style="background-color: green;margin: 2px;border: none;padding: 5px;width: 30%;color: white;border-radius: 4px;">edit</button></a>
+                    <a href="{% url 'retrieve' product.id %}"><button style="background-color: red;margin: 2px;border: none;padding: 5px;width: 30%;color: white;border-radius: 4px;">delete</button></a>  </td>
+                {%endif%}    
+            </tr>    
+            {%endfor%}
+        </table>
+    </section>
+    
+</section>
+{%endblock content%}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+<body>
+    <section id="header">
+        <a href="{% url 'home' %}"><h3>Inventory_management_system</h3></a>
+        <ul>
+            {%if user.is_authenticated %}
+            <li>
+                <form action="{% url 'search'%}" method="get" style="display: flex;width: 350px;justify-content:baseline;
+                align-items: baseline;">
+                    <input type="text" name="query" placeholder="Search........" style="height:35px;width: 270px;
+                    border-radius: 15px;text-align: right;border: none;padding-right: 20px;">
+                    <button type="submit" style="background-color: fuchsia;
+                    border: none;width: 50px;color: white;border-radius: 4px;margin-left: 3px;">search</button>
+    
+                </form>
+            </li>
+            <a href="{% url 'logout'%}"><li>Logout</li></a>
+            <a href="{% url 'profile'%}"><li><img src="{{request.user.profile.image.url}}" style="height: 50px;width: 50px;border-radius: 25px;"></li></a>
+
+            {%else%}
+            <a href="{% url 'register'%}"><li>Register</li></a>
+            <a href="{% url 'login'%}"><li>Login</li></a>
+            {%endif%}
+
+            
+
+            
+        </ul>
+    </section>
+</body>       
+</html>

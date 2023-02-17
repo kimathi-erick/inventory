@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+{%load static%}
+{%block content%}
+
+<section id="profile">
+    <h2>Profile_Page</h2><a href="{% url 'profile_update' %}"><button style="background-color: green;margin: 2px;border: none;padding: 5px;width: 10%;color: white;border-radius: 4px;">edit_profile</button></a>
+    <hr>
+    <section id="profile1">
+        <table>    
+            <tr><th>Username</th><td>{{user.username}}</td></tr>
+            <tr><th>Email</th><td> {{user.email}}</td></tr>
+            <tr><th>Phone_number</th><td>{{user.profile.phone}}</td></tr>
+            <tr><th>Address</th><td>{{user.profile.address}}</td></tr>
+            <img src="{{user.profile.image.url}}" style="width: 200px;border: 2px solid grey;height: 290px;border-radius: 10px;">
+        </table>    
+    </section>
+
+    
+</section>
+    
+    
+{%endblock content%}

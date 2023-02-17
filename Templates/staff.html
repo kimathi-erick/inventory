@@ -1,0 +1,30 @@
+
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+{%load static%}
+{%block content%}
+<h2>User's_Page</h2>
+<section  style="text-align: center;">
+    <hr>
+    <section id="stats">
+        <table style="width: 100%;"> 
+            <tr><th><b>Name</b></th><th><b>Email</b></th><th><b>Phone</b></th><th><b>Address</b></th></tr>
+            {% for worker in workers %}
+            {% if user.is_superuser or worker == user%}
+            <tr><td>{{worker.username}}</td>
+                <td>{{worker.email}}</td>
+                <td>{{worker.profile.phone}}</td>
+                <td>{{worker.profile.address}}</td>
+            </tr>    
+            {%endif%}
+            {%endfor%}      
+        </table>    
+    </section>
+
+    
+</section>
+    
+    
+{%endblock content%}
+
+
